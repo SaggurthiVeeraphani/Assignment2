@@ -18,32 +18,11 @@ import java.util.Map;
 @RequestMapping("/api")
 public class StockSubscriptionController {
     @Autowired
-    UserService userService;
-
-    @Autowired
     StockSubscriptionService stockSubscriptionService;
 
     @Autowired
     StockSubscriptionRepository stockSubscriptionRepository;
 
-
-    // User registration endpoint
-    @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody User user) {
-        userService.save(user);
-        return ResponseEntity.ok("User registration successful");
-    }
-
-    // User login endpoint
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        if (userService.login(user.getEmail(), user.getPassword())) {
-            String sessionId = userService.generateSessionId(user.getEmail());
-            return ResponseEntity.ok(sessionId);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-    }
 
     // Endpoint to subscribe to stock ticker
     @PostMapping("/subscribe")

@@ -5,6 +5,7 @@ import com.example.stockAPI.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.UUID;
 
 @Service
@@ -14,6 +15,7 @@ public class UserService {
 
     // Method to save user to database
     public void save(User user) {
+
         userRepository.save(user);
     }
 
@@ -34,4 +36,7 @@ public class UserService {
         userRepository.save(user);
         return sessionId;
     }
+    /*private String setSessionId(String sessionId){
+        return new String(Base64.getDecoder().decode(sessionId.split(";")[0].split("=")[1]));
+    }*/
 }
