@@ -13,5 +13,6 @@ public class StockDataService {
         // Call API to get stock data
         // Extract required metrics and store in MongoDB
         // Return the stored stock data
+        return null;
     }
 }

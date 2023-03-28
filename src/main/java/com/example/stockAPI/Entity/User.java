@@ -34,7 +34,8 @@ public class User {
 
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private String sessionId;
+
     private List<StockSubscription> stockSubscriptions = new ArrayList<StockSubscription>();
 
 }

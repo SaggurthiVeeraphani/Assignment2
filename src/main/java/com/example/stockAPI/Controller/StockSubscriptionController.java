@@ -10,13 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-public class StockSubscriptionController {
+public class StockSubscriptionController{
     @Autowired
     StockSubscriptionService stockSubscriptionService;
 
@@ -35,14 +36,20 @@ public class StockSubscriptionController {
 
         stockSubscription1.setStockSymbol(symbol);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization",token);
+        //headers.add("Authorization",token);
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<StockSubscription> entity = new HttpEntity<StockSubscription>(stockSubscription1,headers);
 
 
+        String componentBuilder = UriComponentsBuilder.fromHttpUrl("https://www.alphavantage.co/query")
+                .queryParam("function", "TIME_SERIES_INTRADAY")
+                .queryParam("symbol", "IBM")
+                .queryParam("interval", "5min")
+                .queryParam("apikey", "demo").toString();
+
         ResponseEntity<Object> responseEntity = (ResponseEntity<Object>) restTemplate.exchange(
                 "https://www.alphavantage.co/documentation/", HttpMethod.POST, entity, Object.class).getBody();
-        stockSubscriptionRepository.save();
+        //stockSubscriptionRepository.save();
 
         return ResponseEntity.ok("Stock subscription successful");
     }

@@ -28,8 +28,8 @@ public class StockSubscriptionService {
         Map<String, Map<String, Stock>> stockDetails = new HashMap<>();
         for (Stock stock : stocks) {
             Map<String, Stock> stockData = new HashMap<>();
-            stockData.put(stock.getId(), stock);
-            stockDetails.put(stock.getSymbol(), stockData);
+            //stockData.put(stock.getId(), stock);
+            //stockDetails.put(stock.getSymbol(), stockData);
         }
         return stockDetails;
     }
